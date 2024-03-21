@@ -263,7 +263,7 @@ if nav == "Data & Modelling":
     ax_IO.set_ylabel('inertia')
     ax_IO.set_title('inertia decrease by cluster')
 
-    label_comparison = pd.read_csv("/ML_kunskapskontroll/cluster_label_comparison.csv")
+    label_comparison = pd.read_csv("./ML_kunskapskontroll/cluster_label_comparison.csv")
     label_comparison.set_index("n_clusters", inplace=True)
     label_comparison.drop("Unnamed: 0", inplace=True, axis=1)
 
