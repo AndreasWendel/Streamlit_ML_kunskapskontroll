@@ -9,25 +9,24 @@ from sklearn.metrics import accuracy_score, f1_score
 
 from sklearn.ensemble import ExtraTreesClassifier
 
-from sklearn.decomposition import KernelPCA
+
 from sklearn.linear_model import LogisticRegression
 
 from sklearn.svm import LinearSVC
 
-from sklearn.cluster import KMeans
+
 from sklearn.cluster import MiniBatchKMeans
 
 from sklearn import metrics
-from sklearn.metrics import silhouette_score
-from sklearn.pipeline import Pipeline
+
 
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from sklearn.utils import shuffle
+
 import joblib
-import streamlit as st
 import tkinter
 from tkinter import filedialog
+import cv2
 # global parameter
 
 def kmeans_predict_score (model,reference_labels,X_data,y_data):
@@ -115,7 +114,58 @@ def display_confusion_matrix(y_test, y_pred):
     cm = confusion_matrix(y_test, y_pred)
     ConfusionMatrixDisplay(cm).plot()
 
+def load_predict_image(model):
+    tkinter.Tk().withdraw()
+    image_path = filedialog.askopenfilename()
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    image = 255 - image
+    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
+    normalized_image = resized_image / 255.0  # Normalize pixel
+    flattened_image = normalized_image.flatten()
+    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
 
+    # Make predictions
+    predictions = model.predict(flattened_image)
+
+    return predictions[0]
+
+def show_computer_image():
+    tkinter.Tk().withdraw()
+    image_path = filedialog.askopenfilename()
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    image = 255 - image
+    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
+    normalized_image = resized_image / 255.0  # Normalize pixel
+    flattened_image = normalized_image.flatten()
+    flattened_image = np.reshape(flattened_image, (1, 784))
+
+    return plt.imshow(flattened_image.reshape(28, 28), cmap=mpl.cm.binary)
+
+def test(model):
+    tkinter.Tk().withdraw()
+    image_path = filedialog.askopenfilename()
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    image = 255 - image
+    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
+    normalized_image = resized_image / 255.0  # Normalize pixel
+    flattened_image = normalized_image.flatten()
+    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
+
+    # Make predictions
+    predictions = model.predict(flattened_image)
+
+    return plt.imshow(flattened_image.reshape(28, 28), cmap=mpl.cm.binary), print(predictions[0])
+
+def get_image():
+    tkinter.Tk().withdraw()
+    image_path = filedialog.askopenfilename()
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    image = 255 - image
+    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
+    normalized_image = resized_image / 255.0  # Normalize pixel
+    flattened_image = normalized_image.flatten()
+    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
+    return flattened_image
 
 state = 42
 

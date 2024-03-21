@@ -10,8 +10,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import joblib
 import cv2
-import tkinter
-from tkinter import filedialog
 import streamlit as st
 
 
@@ -95,63 +93,9 @@ def display_confusion_matrix(y_test, y_pred):
     ConfusionMatrixDisplay(cm).plot()
 
 
-def load_predict_image(model):
-    tkinter.Tk().withdraw()
-    image_path = filedialog.askopenfilename()
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    image = 255 - image
-    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
-    normalized_image = resized_image / 255.0  # Normalize pixel
-    flattened_image = normalized_image.flatten()
-    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
-
-    # Make predictions
-    predictions = model.predict(flattened_image)
-
-    return predictions[0]
 
 
 # plt.imshow(normalized_image.reshape(28, 28), cmap=mpl.cm.binary)
-
-def show_computer_image():
-    tkinter.Tk().withdraw()
-    image_path = filedialog.askopenfilename()
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    image = 255 - image
-    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
-    normalized_image = resized_image / 255.0  # Normalize pixel
-    flattened_image = normalized_image.flatten()
-    flattened_image = np.reshape(flattened_image, (1, 784))
-
-    return plt.imshow(flattened_image.reshape(28, 28), cmap=mpl.cm.binary)
-
-
-def test(model):
-    tkinter.Tk().withdraw()
-    image_path = filedialog.askopenfilename()
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    image = 255 - image
-    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
-    normalized_image = resized_image / 255.0  # Normalize pixel
-    flattened_image = normalized_image.flatten()
-    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
-
-    # Make predictions
-    predictions = model.predict(flattened_image)
-
-    return plt.imshow(flattened_image.reshape(28, 28), cmap=mpl.cm.binary), print(predictions[0])
-
-
-def get_image():
-    tkinter.Tk().withdraw()
-    image_path = filedialog.askopenfilename()
-    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    image = 255 - image
-    resized_image = cv2.resize(image, (28, 28))  # Resize image to 28x28
-    normalized_image = resized_image / 255.0  # Normalize pixel
-    flattened_image = normalized_image.flatten()
-    flattened_image = np.reshape(flattened_image, (1, 784))  # Reshape
-    return flattened_image
 
 
 def st_get_image(uploaded_image):
