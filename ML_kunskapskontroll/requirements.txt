@@ -2,7 +2,7 @@ joblib
 matplotlib
 numpy
 openbb
-opencv_python
+opencv-python-headless
 pandas
 pandas_datareader
 plotly
