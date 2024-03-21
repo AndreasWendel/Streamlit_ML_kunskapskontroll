@@ -183,15 +183,15 @@ if nav == "Data & Modelling":
     # https://www.kaggle.com/kaggle-survey-2022 2022 rapporten men dem pratar inte så mkt om modeller.
     # ^orelevant till arbetet men kan va kul att se
 
-    LR_normal_data = joblib.load(".\ML kunskapskontroll\Data scale diff results\LR_normal_data.pkl")
+    LR_normal_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_normal_data.pkl")
     Normal_data_score = LR_normal_data.score(X_val_temp, y_val_temp)
     y_pred_Normal_data_score = LR_normal_data.predict(X_val_temp)
 
-    LR_simple_scale_data = joblib.load(".\ML kunskapskontroll\Data scale diff results\LR_simple_scale_data.pkl")
+    LR_simple_scale_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_simple_scale_data.pkl")
     Simple_scale_data = LR_simple_scale_data.score(X_val_temp_simple_scaled, y_val_temp)
     y_pred_Simple_scale_data = LR_simple_scale_data.predict(X_val_temp_simple_scaled)
 
-    LR_scaled_data = joblib.load(".\ML kunskapskontroll\Data scale diff results\LR_scaled_data.pkl")
+    LR_scaled_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_scaled_data.pkl")
     Scaled_data = LR_scaled_data.score(X_val_temp_scaled, y_val_temp)
     y_pred_Scaled_data = LR_scaled_data.predict(X_val_temp_scaled)
 
@@ -225,7 +225,7 @@ if nav == "Data & Modelling":
 
     # val modeller
 
-    grid_mbk = joblib.load(".\ML kunskapskontroll\grid_mbk_val.pkl")
+    grid_mbk = joblib.load(".\ML_kunskapskontroll\grid_mbk_val.pkl")
 
     mbkgridresults = pd.DataFrame(grid_mbk.cv_results_)
     # högst cluster kommer allit ha bättre inertia med när faller den av
@@ -248,7 +248,7 @@ if nav == "Data & Modelling":
     score_list = []
     temp = []
     for i in cluster_number:
-        kmeanstest = joblib.load(".\ML kunskapskontroll\kmeans cluster test\kmeanstest" + str(i) + ".pkl")
+        kmeanstest = joblib.load(".\ML_kunskapskontroll\kmeans cluster test\kmeanstest" + str(i) + ".pkl")
         temp.append(calculate_metrics_list(kmeanstest, y_train))
 
     metric = pd.DataFrame(temp, columns=["Cluster", "inertia", "Homogeneity", "Accuracy score"])
@@ -263,14 +263,14 @@ if nav == "Data & Modelling":
     ax_IO.set_ylabel('inertia')
     ax_IO.set_title('inertia decrease by cluster')
 
-    label_comparison = pd.read_csv("ML kunskapskontroll\cluster_label_comparison.csv")
+    label_comparison = pd.read_csv("ML_kunskapskontroll\cluster_label_comparison.csv")
     label_comparison.set_index("n_clusters", inplace=True)
     label_comparison.drop("Unnamed: 0", inplace=True, axis=1)
 
-    grid_lr = joblib.load(".\ML kunskapskontroll\grid_lr_val.pkl")
-    grid_svm = joblib.load(".\ML kunskapskontroll\grid_svm_val.pkl")
-    grid_xt = joblib.load(".\ML kunskapskontroll\grid_xt_val.pkl")
-    opti_mbkm = joblib.load(".\ML kunskapskontroll\opti_mbkmeans.pkl")
+    grid_lr = joblib.load(".\ML_kunskapskontroll\grid_lr_val.pkl")
+    grid_svm = joblib.load(".\ML_kunskapskontroll\grid_svm_val.pkl")
+    grid_xt = joblib.load(".\ML_kunskapskontroll\grid_xt_val.pkl")
+    opti_mbkm = joblib.load(".\ML_kunskapskontroll\opti_mbkmeans.pkl")
     reference_labels = retrieve_info(opti_mbkm, y_train)
     kmeans_predict = kmeans_predictions(opti_mbkm, reference_labels, X_val_scaled, y_val)
 
@@ -289,7 +289,7 @@ if nav == "Data & Modelling":
     X_train_full, X_test_full, y_train_full, y_test_full = train_test_split(X_myscale, y, test_size=0.20,
                                                                             random_state=42)
 
-    final_EX_tree = joblib.load(".\ML kunskapskontroll\Final_EX_tree.pkl")  # litet f skapar string format....
+    final_EX_tree = joblib.load(".\ML_kunskapskontroll\Final_EX_tree.pkl")  # litet f skapar string format....
 
     print('Final model score: {}'.format(final_EX_tree.score(X_test_full, y_test_full)))
     from tkinter.filedialog import askopenfilename
@@ -527,7 +527,7 @@ if nav == "Data & Modelling":
 
 if nav == "predict":
 
-    final_EX_tree = joblib.load(".\ML kunskapskontroll\Final_EX_tree.pkl")  # litet f skapar string format....
+    final_EX_tree = joblib.load(".\ML_kunskapskontroll\Final_EX_tree.pkl")  # litet f skapar string format....
 
     st.title("Prediction Modell test")
     st.write('Try uploading an image to predict')
