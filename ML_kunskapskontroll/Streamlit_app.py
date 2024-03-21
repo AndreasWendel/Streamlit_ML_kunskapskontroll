@@ -183,15 +183,15 @@ if nav == "Data & Modelling":
     # https://www.kaggle.com/kaggle-survey-2022 2022 rapporten men dem pratar inte så mkt om modeller.
     # ^orelevant till arbetet men kan va kul att se
 
-    LR_normal_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_normal_data.pkl")
+    LR_normal_data = joblib.load("./ML_kunskapskontroll/Data scale diff results/LR_normal_data.pkl")
     Normal_data_score = LR_normal_data.score(X_val_temp, y_val_temp)
     y_pred_Normal_data_score = LR_normal_data.predict(X_val_temp)
 
-    LR_simple_scale_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_simple_scale_data.pkl")
+    LR_simple_scale_data = joblib.load("./ML_kunskapskontroll/Data scale diff results/LR_simple_scale_data.pkl")
     Simple_scale_data = LR_simple_scale_data.score(X_val_temp_simple_scaled, y_val_temp)
     y_pred_Simple_scale_data = LR_simple_scale_data.predict(X_val_temp_simple_scaled)
 
-    LR_scaled_data = joblib.load(".\ML_kunskapskontroll\Data scale diff results\LR_scaled_data.pkl")
+    LR_scaled_data = joblib.load("./ML_kunskapskontroll/Data scale diff results/LR_scaled_data.pkl")
     Scaled_data = LR_scaled_data.score(X_val_temp_scaled, y_val_temp)
     y_pred_Scaled_data = LR_scaled_data.predict(X_val_temp_scaled)
 
